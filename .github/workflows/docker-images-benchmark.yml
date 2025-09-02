@@ -3,6 +3,8 @@ name: Benchmark Docker Image CI
 on:
   workflow_dispatch:
   push:
+    paths-ignore:
+      - '.lab/**'
     branches:
       - master
     paths:

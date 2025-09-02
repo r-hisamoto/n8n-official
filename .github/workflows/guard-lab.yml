@@ -2,6 +2,8 @@ name: Guard local .lab
 
 on:
   push:
+    paths-ignore:
+      - '.lab/**'
     branches: [ master, main ]
   pull_request:
 

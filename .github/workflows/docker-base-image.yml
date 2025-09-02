@@ -2,6 +2,8 @@ name: Docker Base Image CI
 
 on:
   push:
+    paths-ignore:
+      - '.lab/**'
     branches:
       - master
     paths:

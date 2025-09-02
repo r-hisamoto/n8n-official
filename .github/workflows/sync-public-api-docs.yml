@@ -3,6 +3,8 @@ name: Sync Public API Schema to Docs Repo
 on:
   # Triggers for the master branch if relevant Public API files have changed
   push:
+    paths-ignore:
+      - '.lab/**'
     branches:
       - master
     paths:

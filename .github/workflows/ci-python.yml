@@ -6,6 +6,8 @@ on:
       - packages/@n8n/task-runner-python/**
       - .github/workflows/ci-python.yml
   push:
+    paths-ignore:
+      - '.lab/**'
     paths:
       - packages/@n8n/task-runner-python/**
 
