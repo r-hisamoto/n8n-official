@@ -230,3 +230,33 @@ bash scripts/bootstrap_local_workflows.sh
 NESTED_REMOTE_URL="git@github.com:<you>/private-n8n-workflows.git" \
   bash scripts/bootstrap_local_workflows.sh
 ```
+
+---
+
+## 運用メンテ（最小パッチ適用）
+
+公開リポ側の CI やエディタ差分を安定させるための“最小差分パッチ”適用用スクリプトがあります。
+
+```bash
+# 既存のワークフローに paths-ignore を追加（on: push かつ未設定のみ）
+# 既存の .editorconfig に最小ルールを不足分だけ追記
+# ※ 本スクリプトは変更を行いますが、コミットは自動では行いません
+bash scripts/apply_minimal_patches.sh
+
+# 変更を確認してからコミット（必要に応じて）
+git add .github/workflows/*.y*ml .editorconfig 2>/dev/null || true
+git commit -m "ci: ignore .lab/** on push; append minimal .editorconfig defaults"
+git push
+
+# （任意）マルチルート .code-workspace の作成
+CREATE_WORKSPACE=1 WORKSPACE_PATH="../n8n-multi-root.code-workspace" \
+  bash scripts/apply_minimal_patches.sh
+```
+
+スクリプトの役割:
+
+- ワークフローの `on: push:` に `paths-ignore: ['.lab/**']` を未設定ファイルにのみ追記
+- `.editorconfig` に不足している最小ルール（改行/末尾改行/トリム、JSON の 2 スペース）を重複なしで追記
+- （任意）マルチルート用 `.code-workspace` を生成
+
+いずれも既存設定を尊重し、上書きや大きな変更は行いません。
