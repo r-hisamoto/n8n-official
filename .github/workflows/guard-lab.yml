@@ -1,0 +1,23 @@
+name: Guard local .lab
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Ensure .lab is not tracked
+        run: |
+          if git ls-files .lab | grep .; then
+            echo "::error::.lab/ is tracked in Git. Remove it from history and keep it untracked."
+            exit 1
+          fi
+
+      - name: Show tracked paths (debug)
+        run: git ls-files | sed -n '1,200p'
