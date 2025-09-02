@@ -21,3 +21,4 @@
 - 運用上の判断や保護措置（フック/CI/ルールの追加など）を行ったら、1 行で要約し、コミットリンクを添えます。
 - リリースノート用途ではないため、機能改修やドキュメントの細かな修正は CHANGELOG 側に任せ、Ops Log は“運用まわりの決定と履歴”に絞ります。
 
+- 2025-09-02 23:27 JST: ルートに AGENTS.md を追加 / apply_minimal_patches.sh を追加 — コミット: 48ba1ccb1\n  https://github.com/r-hisamoto/n8n-official/commit/48ba1ccb1
